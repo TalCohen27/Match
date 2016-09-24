@@ -1,0 +1,18 @@
+tr.border_bottom td {
+  border-bottom:1pt solid black;
+}
+
+@media only screen and (max-width: 800px) {
+	section[name = "unseen"] table td:nth-child(6), 
+	section[name = "unseen"] table th:nth-child(6) {display: none;}
+}
+
+@media only screen and (max-width: 640px) {
+	section[name = "unseen"] table td:nth-child(5),
+	section[name = "unseen"] table th:nth-child(5) {display: none;}
+}
+
+@media only screen and (max-width: 480px) {
+	section[name = "unseen"] table td:nth-child(4),
+	section[name = "unseen"] table th:nth-child(4){display: none;}
+}

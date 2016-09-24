@@ -1,0 +1,2242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="themes/upDateTheme.min.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile.structure-1.3.2.min.css" />
+
+<!-- <link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" /> -->
+<link rel="stylesheet" href="css/table.css">
+<link rel="stylesheet" href="css/sign_in.css">
+<link rel="stylesheet" href="css/chat.css">
+<link rel="stylesheet" href="css/validateTip.css">
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+
+<!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script
+	src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script> -->
+<script src="scripts/signIn.js"></script>
+<script src="scripts/signout.js"></script>
+<script src="scripts/userdata.js"></script>
+<script src="scripts/heartbeat.js"></script>
+<script src="scripts/partnerdata.js"></script>
+<script src="scripts/jquery.form.js"></script>
+<script src="scripts/upload.js"></script>
+<script src="scripts/forgotpassword.js"></script>
+<script src="scripts/profile.js"></script>
+<script src="scripts/SQLite.js"></script>
+<!--  this script must upload before match.js!!!  -->
+<script src="scripts/match.js"></script>
+<script src="scripts/partner_profile.js"></script>
+<script src="scripts/messages.js"></script>
+<script src="scripts/reviews.js"></script>
+<script src="scripts/reportUser.js"></script>
+<script src="scripts/reportsList.js"></script>
+<script src="scripts/BlockOrBanUser.js"></script>
+<script src="scripts/blockingList.js"></script>
+<script src="scripts/admin_search.js"></script>
+<script src="scripts/editprofile.js"></script>
+<script src="scripts/jquery.validate.min.js"></script>
+<script src="scripts/additional-methods.min.js"></script>
+<script type="text/javascript" src="scripts/date.js"></script>
+<script src="scripts/chat.js"></script>
+<script type="text/javascript" src="scripts/deleteprofile.js"></script>
+<script src="scripts/imageApproval.js"></script>
+</head>
+
+<body>
+
+	<!-- Start of first page -->
+	<div data-role="page" id="page1">
+		<div data-role="header" data-theme="b">
+			<h1>Match</h1>
+		</div>
+		<!-- /header -->
+
+		<div data-role="content">
+
+			<form id=sign_in_button action="checkemailandpassword">
+				<span class="error" id="error">&nbsp;</span> <br />
+				<div data-role="fieldcontain">
+					<label for="email"><b> Email : </b> </label> <input name="email"
+						id="email" placeholder="example@gmail.com" type="email"
+						data-mini="true" required>
+				</div>
+				<div data-role="fieldcontain">
+					<label for="password"><b> Password : </b> </label> <input
+						name="password" id="password" placeholder="" value=""
+						type="password" data-mini="true" required>
+				</div>
+				<div align="right">
+					<input type="submit" data-theme="b" data-icon="check"
+						data-iconpos="left" value="Sign in" data-inline="true">
+				</div>
+			</form>
+
+			<form id=sign_up_button>
+				<div data-controltype="textblock">
+					<br> <br>
+					<h2 style="text-align: left;">
+						Not member of Match? <input type="submit" data-inline="true"
+							value="Sign up to Match" data-mini="true">
+					</h2>
+				</div>
+			</form>
+		</div>
+
+		<div data-role="footer" data-theme="b">
+			<a id="forgot_password" href="#forgotpassword" data-transition="fade"
+				data-theme="d"> Forgot password? </a>
+		</div>
+		<!-- /footer -->
+	</div>
+	<!-- /page -->
+
+	<!-- Start of second page -->
+	<div data-role="page" id="page2">
+
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<span class="ui-title"> </span>
+			<div data-controltype="textblock">
+				<p style="text-align: center;">
+					<b> Step1 </b> <span id="_mce_caret" data-mce-bogus="true">
+						<em> <span style="color: rgb(192, 192, 192);"
+							data-mce-style="color: #c0c0c0;"> </span>
+					</em>
+					</span>
+				</p>
+			</div>
+		</div>
+
+		<form id=user_data action="acceptuserdata">
+			<span class="error" id="acceptuserdataerror"></span> <br />
+			<h1>Please enter information about yourself</h1>
+			<div id="data">
+				<div data-role="fieldcontain" data-controltype="textarea">
+					<br> <label>First Name:</label><br> <input type="text"
+						id="first" name="first" required /> <br> <label>Last
+						Name:</label><br> <input type="text" id="last" name="last" required /><br />
+					<br> <label>Email:</label><br> <input type="email"
+						id="user_email" name="user_email" required /><br /> <br> <label>Password:</label><br>
+					<input type="password" id="user_password" name="user_password"
+						required /><br /> <br>
+					<textarea name="about_me" id="about_me"
+						placeholder="write about yourself"></textarea>
+
+				</div>
+				<div data-role="fieldcontain">
+					<label>Birthday:</label><br> <input type="date" id="birthday"
+						name="birthday" required><br />
+				</div>
+				<div data-role="fieldcontain" data-controltype="selectmenu">
+					<br> <label>Sex:</label><br> <select id="sex">
+						<option value="male">Male</option>
+						<option value="female" selected>Female</option>
+					</select><br /> <br> <label>Education:</label><br> <select
+						id="education" required>
+						<option value="higher">Higher education</option>
+						<option value="secondary">Secondary education</option>
+					</select><br /> <br> <label>Area:</label><br> <select id="area"
+						required>
+						<option value="darom">Darom</option>
+						<option value="tzafon">Tzafon</option>
+						<option value="merkaz">Merkaz</option>
+						<option value="eilat">Eilat</option>
+					</select><br /> <br> <label>Language:</label><br> <select
+						id="language" required>
+						<option value="hebrew">Hebrew</option>
+						<option value="english">English</option>
+						<option value="russian">Russian</option>
+					</select><br /> <br> <label>Marital status:</label><br> <select
+						id="marital_status" required>
+						<option value="single">Single</option>
+						<option value="divorced">Divorced</option>
+						<option value="widow/widower">Widow/Widower</option>
+					</select><br /> <br> <label>Children:</label><br> <select
+						id="children" required>
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+					</select><br /> <br> <label>Eye color:</label><br> <select
+						id="eye_color" required>
+						<option value="blue">Blue</option>
+						<option value="black">Black</option>
+						<option value="green">Green</option>
+						<option value="brown">Brown</option>
+					</select><br /> <br> <label>Hair type:</label><br> <select
+						id="hair_type" required>
+						<option value="curly">Curly</option>
+						<option value="straight">Straight</option>
+						<option value="dreads">Dreads</option>
+						<option value="wavy">Wavy</option>
+					</select><br /> <br> <label>Hair color:</label><br> <select
+						id="hair_color" required>
+						<option value="blond">Blond</option>
+						<option value="brunet">Brunet</option>
+						<option value="black">Black</option>
+						<option value="color">Color</option>
+					</select><br /> <br> <label>Origin:</label><br> <select
+						id="origin" required>
+						<option value="ashkenazic">Ashkenazic</option>
+						<option value="sephardi">Sephardi</option>
+						<option value="else">Else</option>
+					</select><br /> <br> <label>Height:</label><br> <select
+						id="height" required>
+						<option value="141">141</option>
+						<option value="142">142</option>
+						<option value="143">143</option>
+						<option value="144">144</option>
+						<option value="145">145</option>
+						<option value="146">146</option>
+						<option value="147">147</option>
+						<option value="148">148</option>
+						<option value="149">149</option>
+						<option value="150">150</option>
+						<option value="151">151</option>
+						<option value="152">152</option>
+						<option value="153">153</option>
+						<option value="154">154</option>
+						<option value="155">155</option>
+						<option value="156">156</option>
+						<option value="157">157</option>
+						<option value="158">158</option>
+						<option value="159">159</option>
+						<option value="160">160</option>
+						<option value="161">161</option>
+						<option value="162">162</option>
+						<option value="163">163</option>
+						<option value="164">164</option>
+						<option value="165">165</option>
+						<option value="166">166</option>
+						<option value="167">167</option>
+						<option value="168">168</option>
+						<option value="169">169</option>
+						<option value="170">170</option>
+						<option value="171">171</option>
+						<option value="172">172</option>
+						<option value="173">173</option>
+						<option value="174">174</option>
+						<option value="175">175</option>
+						<option value="176">176</option>
+						<option value="177">177</option>
+						<option value="178">178</option>
+						<option value="179">179</option>
+						<option value="180">180</option>
+						<option value="181">181</option>
+						<option value="182">182</option>
+						<option value="183">183</option>
+						<option value="184">184</option>
+						<option value="185">185</option>
+						<option value="186">186</option>
+						<option value="187">187</option>
+						<option value="188">188</option>
+						<option value="189">189</option>
+						<option value="190">190</option>
+						<option value="191">191</option>
+						<option value="192">192</option>
+						<option value="193">193</option>
+						<option value="194">194</option>
+						<option value="195">195</option>
+						<option value="196">196</option>
+						<option value="197">197</option>
+						<option value="198">198</option>
+						<option value="199">199</option>
+					</select><br /> <br> <label>Weight:</label><br> <select
+						id="weight" required>
+						<option value="40">40</option>
+						<option value="41">41</option>
+						<option value="41">41</option>
+						<option value="41">41</option>
+						<option value="41">41</option>
+						<option value="45">45</option>
+						<option value="46">46</option>
+						<option value="47">47</option>
+						<option value="48">48</option>
+						<option value="49">49</option>
+						<option value="50">50</option>
+						<option value="51">51</option>
+						<option value="52">52</option>
+						<option value="53">53</option>
+						<option value="54">54</option>
+						<option value="55">55</option>
+						<option value="56">56</option>
+						<option value="57">57</option>
+						<option value="58">58</option>
+						<option value="59">59</option>
+						<option value="60">60</option>
+						<option value="61">61</option>
+						<option value="62">62</option>
+						<option value="63">63</option>
+						<option value="64">64</option>
+						<option value="65">65</option>
+						<option value="66">66</option>
+						<option value="67">67</option>
+						<option value="68">68</option>
+						<option value="69">69</option>
+						<option value="70">70</option>
+						<option value="71">71</option>
+						<option value="72">72</option>
+						<option value="73">73</option>
+						<option value="74">74</option>
+						<option value="75">75</option>
+						<option value="76">76</option>
+						<option value="77">77</option>
+						<option value="78">78</option>
+						<option value="79">79</option>
+						<option value="80">80</option>
+						<option value="81">81</option>
+						<option value="82">82</option>
+						<option value="83">83</option>
+						<option value="84">84</option>
+						<option value="85">85</option>
+						<option value="86">86</option>
+						<option value="87">87</option>
+						<option value="88">88</option>
+						<option value="89">89</option>
+						<option value="90">90</option>
+						<option value="91">91</option>
+						<option value="92">92</option>
+						<option value="93">93</option>
+						<option value="94">94</option>
+						<option value="95">95</option>
+						<option value="96">96</option>
+						<option value="97">97</option>
+						<option value="98">98</option>
+						<option value="99">99</option>
+					</select><br /> <br> <label>Religion:</label><br> <select
+						id="religion" required>
+						<option value="christian">Christian</option>
+						<option value="jew">Jew</option>
+						<option value="muslim">Muslim</option>
+						<option value="buddhism">Buddhism</option>
+						<option value="atheist">Atheist</option>
+					</select><br /> <br> <label>Smoking:</label><br> <select
+						id="smoking" required>
+						<option value="smoker">Smoker</option>
+						<option value="non_smoker">Non smoker</option>
+						<option value="else">Else</option>
+					</select><br /> <br> <label>Earning level:</label><br> <select
+						id="earning_level" required>
+						<option value="high">High</option>
+						<option value="medium">Medium</option>
+						<option value="low">Low</option>
+						<option value="private">Private</option>
+					</select><br /> <br> <label>Interested in:</label><br> <select
+						id="intrestedIn" required>
+						<option value="male">Men</option>
+						<option value="female">Women</option>
+						<option value="both">Both</option>
+					</select><br /> <br> <label>Physique:</label><br> <select
+						id="physique" required>
+						<option value="thin">Thin</option>
+						<option value="normal">Normal</option>
+						<option value="plump">Plump</option>
+						<option value="athletic">Athletic</option>
+					</select><br />
+
+				</div>
+
+			</div>
+			<div data-role="content">
+				<input type="submit" data-inline="true" value="Next">
+			</div>
+
+		</form>
+
+		<div data-role="footer"></div>
+		<!-- /footer -->
+	</div>
+	<!-- /page -->
+
+	<!-- Start of third page -->
+	<div data-role="page" id="page3">
+
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<span class="ui-title"> </span>
+			<div data-controltype="textblock">
+				<p style="text-align: center;">
+					<b> Step2 </b> <span id="_mce_caret" data-mce-bogus="true">
+						<em> <span style="color: rgb(192, 192, 192);"
+							data-mce-style="color: #c0c0c0;"> </span>
+					</em>
+					</span>
+				</p>
+			</div>
+		</div>
+
+		<form id=partner_data action="acceptpartnerdata">
+			<h1>Please enter information about your partner</h1>
+			<div id="partnerdata">
+				<div data-role="fieldcontain" data-controltype="selectmenu">
+					<br /> <label>Education:</label><br /> <select
+						id="partner_education" required>
+						<option value="higher">Higher education</option>
+						<option value="secondary">Secondary education</option>
+						<option value="none">None</option>
+					</select><br /> <br /> <label>Area:</label><br /> <select
+						id="partner_area" required>
+						<option value="darom">Darom</option>
+						<option value="tzafon">Tzafon</option>
+						<option value="merkaz">Merkaz</option>
+						<option value="eilat">Eilat</option>
+						<option value="none">None</option>
+					</select><br /> <br /> <label>Language:</label><br /> <select
+						id="partner_language" required>
+						<option value="hebrew">Hebrew</option>
+						<option value="english">English</option>
+						<option value="russian">Russian</option>
+						<option value="none">None</option>
+					</select><br /> <br /> <label>Marital_status:</label><br /> <select
+						id="partner_marital_status" required>
+						<option value="single">Single</option>
+						<option value="divorced">Divorced</option>
+						<option value="widow/widower">Widow/Widower</option>
+						<option value="none">None</option>
+					</select><br /> <br /> <label>Eye color:</label><br /> <select
+						id="partner_eye_color" required>
+						<option value="blue">Blue</option>
+						<option value="green">Green</option>
+						<option value="brown">Brown</option>
+						<option value="none">None</option>
+					</select><br /> <br /> <label>Hair type:</label><br /> <select
+						id="partner_hair_type" required>
+						<option value="curly">Curly</option>
+						<option value="straight">Straight</option>
+						<option value="dreads">Dreads</option>
+						<option value="wavy">Wavy</option>
+						<option value="none">None</option>
+					</select><br /> <br /> <label>Hair color:</label><br /> <select
+						id="partner_hair_color" required>
+						<option value="blond">Blond</option>
+						<option value="brunet">Brunet</option>
+						<option value="black">Black</option>
+						<option value="color">Color</option>
+						<option value="none">None</option>
+					</select><br /> <br /> <label>Origin:</label><br /> <select
+						id="partner_origin" required>
+						<option value="ashkenazic">Ashkenazic</option>
+						<option value="sephardi">Sephardi</option>
+						<option value="else">Else</option>
+						<option value="none">None</option>
+					</select><br /> <br /> <label>Height of partner: from:</label><br /> <select
+						id="partner_height_min" required>
+						<option selected="selected" value="140">140</option>
+						<option value="150">150</option>
+						<option value="160">160</option>
+						<option value="170">170</option>
+						<option value="180">180</option>
+						<option value="190">190</option>
+					</select><br /> <br /> <label>to:</label><br /> <select
+						id="partner_height_max" required>
+						<option value="140">149</option>
+						<option value="150">159</option>
+						<option value="160">169</option>
+						<option value="170">179</option>
+						<option value="180">189</option>
+						<option selected="selected" value="190">199</option>
+					</select><br /> <br /> <label>Religion:</label><br /> <select
+						id="partner_religion" required>
+						<option value="christian">Christian</option>
+						<option value="jew">Jew</option>
+						<option value="muslim">Muslim</option>
+						<option value="buddhism">Buddhism</option>
+						<option value="none">None</option>
+					</select><br /> <br /> <label>Smoking:</label><br /> <select
+						id="partner_smoking" required>
+						<option value="smoker">Smoker</option>
+						<option value="non_smoker">Non smoker</option>
+						<option value="none">None</option>
+					</select><br /> <br /> <label>Earning level:</label><br /> <select
+						id="partner_earning_level" required>
+						<option value="high">High</option>
+						<option value="medium">Medium</option>
+						<option value="low">Low</option>
+						<option value="none">None</option>
+					</select><br /> <br /> <label>Physique:</label><br /> <select
+						id="partner_physique" required>
+						<option value="thin">Thin</option>
+						<option value="normal">Normal</option>
+						<option value="plump">Plump</option>
+						<option value="athletic">Athletic</option>
+						<option value="none">None</option>
+					</select><br /> <br /> <label>Age of partner: from:</label><br /> <select
+						id="partner_age_min" required>
+						<option selected="selected" value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+						<option value="32">32</option>
+						<option value="33">33</option>
+						<option value="34">34</option>
+						<option value="35">35</option>
+						<option value="36">36</option>
+						<option value="37">37</option>
+						<option value="38">38</option>
+						<option value="39">39</option>
+						<option value="40">40</option>
+						<option value="41">41</option>
+						<option value="42">42</option>
+						<option value="43">43</option>
+						<option value="44">44</option>
+						<option value="45">45</option>
+						<option value="46">46</option>
+						<option value="47">47</option>
+						<option value="48">48</option>
+						<option value="49">49</option>
+						<option value="50">50</option>
+						<option value="51">51</option>
+						<option value="52">52</option>
+						<option value="53">53</option>
+						<option value="54">54</option>
+						<option value="55">55</option>
+						<option value="56">56</option>
+						<option value="57">57</option>
+						<option value="58">58</option>
+						<option value="59">59</option>
+						<option value="60">60</option>
+						<option value="61">61</option>
+						<option value="62">62</option>
+						<option value="63">63</option>
+						<option value="64">64</option>
+						<option value="65">65</option>
+						<option value="66">66</option>
+						<option value="67">67</option>
+						<option value="68">68</option>
+						<option value="69">69</option>
+						<option value="70">70</option>
+						<option value="71">71</option>
+						<option value="72">72</option>
+						<option value="73">73</option>
+						<option value="74">74</option>
+						<option value="75">75</option>
+						<option value="76">76</option>
+						<option value="77">77</option>
+						<option value="78">78</option>
+						<option value="79">79</option>
+						<option value="80">80</option>
+					</select><br /> <br /> <label>to</label><br /> <select
+						id="partner_age_max" required>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+						<option value="32">32</option>
+						<option value="33">33</option>
+						<option value="34">34</option>
+						<option value="35">35</option>
+						<option value="36">36</option>
+						<option value="37">37</option>
+						<option value="38">38</option>
+						<option value="39">39</option>
+						<option value="40">40</option>
+						<option value="41">41</option>
+						<option value="42">42</option>
+						<option value="43">43</option>
+						<option value="44">44</option>
+						<option value="45">45</option>
+						<option value="46">46</option>
+						<option value="47">47</option>
+						<option value="48">48</option>
+						<option value="49">49</option>
+						<option value="50">50</option>
+						<option value="51">51</option>
+						<option value="52">52</option>
+						<option value="53">53</option>
+						<option value="54">54</option>
+						<option value="55">55</option>
+						<option value="56">56</option>
+						<option value="57">57</option>
+						<option value="58">58</option>
+						<option value="59">59</option>
+						<option value="60">60</option>
+						<option value="61">61</option>
+						<option value="62">62</option>
+						<option value="63">63</option>
+						<option value="64">64</option>
+						<option value="65">65</option>
+						<option value="66">66</option>
+						<option value="67">67</option>
+						<option value="68">68</option>
+						<option value="69">69</option>
+						<option value="70">70</option>
+						<option value="71">71</option>
+						<option value="72">72</option>
+						<option value="73">73</option>
+						<option value="74">74</option>
+						<option value="75">75</option>
+						<option value="76">76</option>
+						<option value="77">77</option>
+						<option value="78">78</option>
+						<option value="79">79</option>
+						<option selected="selected" value="80">80</option>
+					</select><br />
+
+				</div>
+			</div>
+
+			<div data-role="content">
+				<input type="submit" data-inline="true" value="Go!">
+			</div>
+		</form>
+
+		<div data-role="footer"></div>
+		<!-- /footer -->
+	</div>
+	<!-- /page -->
+
+	<!-- Start of upload page -->
+	<div data-role="page" id="upload">
+
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<span class="ui-title"> </span>
+			<div data-controltype="textblock">
+				<p style="text-align: center;">
+					<b> Step3 </b> <span id="_mce_caret" data-mce-bogus="true">
+						<em> <span style="color: rgb(192, 192, 192);"
+							data-mce-style="color: #c0c0c0;"> </span>
+					</em>
+					</span>
+				</p>
+			</div>
+		</div>
+
+		<div data-role="content">
+			<p class="validateTips">Choose your photo please</p>
+			<p class="validateErrorTips"></p>
+
+			<form id='imageUpload' action="upload" method="post"
+				enctype="multipart/form-data">
+				<span id="uploaderror" class="error"></span>
+				<div data-role="fieldcontain" data-controltype="fileinput">
+					<br /> <input type="file" name="file" id="file" accept="image/*"><br>
+				</div>
+				<div data-role="fieldcontain">
+					<input type="Submit" value="Upload File" id="subm"><br>
+				</div>
+			</form>
+
+			<span id="errorupload">&nbsp;</span>
+		</div>
+
+		<div data-role="footer"></div>
+		<!-- /footer -->
+	</div>
+	<!-- /page -->
+
+	<!-- Start of forgotpassword page -->
+	<div data-role="page" id="forgotpassword">
+
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<span class="ui-title"> </span>
+			<div data-controltype="textblock">
+				<p style="text-align: center;">
+					<b> Password restore </b> <span id="_mce_caret"
+						data-mce-bogus="true"> <em> <span
+							style="color: rgb(192, 192, 192);"
+							data-mce-style="color: #c0c0c0;"> </span>
+					</em>
+					</span>
+				</p>
+			</div>
+		</div>
+
+
+		<div data-role="content">
+			<span id="errorfogrotpassword" class="error"></span>
+			<form id=forgotpasswordform action="forgotpassword">
+
+				<div data-role="fieldcontain">
+
+					<label for="textinput3"> Please enter your email address </label><br />
+					<input name="useremail" id="useremail" placeholder="" value=""
+						type="email" required>
+				</div>
+
+
+				<div data-role="fieldcontain">
+
+					<br /> <label for="textinput3"> Please enter your new
+						password and it will be send to your email address </label><br /> <input
+						name="newpassword" id="newpassword" placeholder="" value=""
+						type="text" required>
+				</div>
+				<input id="sendButton" type="submit" data-theme="b" value="Send">
+			</form>
+
+		</div>
+
+		<div data-role="footer">
+			<a id="backtosignin" href="#page1" data-transition="fade"> Back
+				to Sign in </a>
+		</div>
+		<!-- /footer -->
+	</div>
+	<!-- /page -->
+
+	<!-- My Profile page -->
+	<div data-role="page" data-control-title="My profile" id="page4">
+		<div data-role="panel" id="panel1" data-position="left"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" data-divider-theme="e" data-inset="false">
+				<li data-role="list-divider">Match</li>
+				<li data-theme="b"><a href="#matches" data-transition="slide">
+						Find Partner </a></li>
+				<li data-theme="b"><a href="#reviews" data-transition="slide">
+						Profile Views <span class="ui-li-count"> 14 </span>
+				</a></li>
+				<li class="messagesMenuOption" data-theme="b"><a
+					href="#messages" data-transition="slide"> Messages <span
+						class="ui-li-count"> 0 </span>
+				</a></li>
+				<li data-theme="b"><a href="#blocks" data-transition="slide">
+						Blocking List </a></li>
+				<li data-role="list-divider"></li>
+				<li data-theme="b"><a href="#signout" data-transition="slide">
+						Log Out </a></li>
+			</ul>
+		</div>
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<a data-role="button" data-inline="true" data-direction="reverse"
+				href="#page5" class="ui-btn-right" data-icon="edit"> Edit </a> <a
+				data-controltype="panelbutton" data-role="button" data-inline="true"
+				data-theme="b" href="#panel1" data-icon="bars" data-iconpos="left"
+				class="ui-btn-left"> Menu </a>
+			<h3>My Profile</h3>
+		</div>
+		<div data-role="content">
+			<div style="text-align: center">
+				<img style="width: 20em;" id="profile_photo" src="">
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> First Name: </b> <b id="profile_first_name"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Birthday: </b> <b id="profile_birthday"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Sex: </b> <b id="profile_sex"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Interested In: </b> <b id="profile_intrested_in"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Area: </b> <b id="profile_area"> &nbsp; </b>
+				</p>
+			</div>
+			<hr
+				style="height: 3px; background-color: #ccc; border: 0; margin-top: 12px; margin-bottom: 12px;">
+			<div data-controltype="textblock">
+				<p>
+					<b> About me: </b> <b id="profile_about_me"> &nbsp; </b>
+				</p>
+			</div>
+			<hr
+				style="height: 3px; background-color: #ccc; border: 0; margin-top: 12px; margin-bottom: 12px;">
+			<div data-role="collapsible-set" data-theme="e">
+				<div data-role="collapsible">
+					<h3>Additional User Details</h3>
+					<div data-controltype="textblock">
+						<p>
+							<b> Education: </b> <b id="profile_education"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Language: </b> <b id="profile_language"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Marital Status: </b> <b id="profile_marital_status">
+								&nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Children: </b> <b id="profile_children"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Eye Color: </b> <b id="profile_eye_color"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Hair Type: </b> <b id="profile_hair_type"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Hair Color: </b> <b id="profile_hair_color"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Origin: </b> <b id="profile_origin"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Height: </b> <b id="profile_height"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Weight: </b> <b id="profile_weight"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Religion: </b> <b id="profile_religion"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Smoking: </b> <b id="profile_smoking"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Earning Level: </b> <b id="profile_earning_level"> &nbsp;
+							</b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Physique: </b> <b id="profile_physique"> &nbsp; </b>
+						</p>
+					</div>
+				</div>
+			</div>
+			<hr
+				style="height: 3px; background-color: #ccc; border: 0; margin-top: 12px; margin-bottom: 12px;">
+			<div data-role="collapsible-set" data-theme="e">
+				<div data-role="collapsible">
+					<h3>Partner's Details</h3>
+					<div data-controltype="textblock">
+						<p>
+							<b> Education: </b> <b id="education2"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Area: </b> <b id="area2"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Language: </b> <b id="language2"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Marital Status: </b> <b id="marital_status2"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Eye Color: </b> <b id="eye_color2"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Hair Type: </b> <b id="hair_type2"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Hair Color: </b> <b id="hair_color2"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Origin: </b> <b id="origin2"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Height Of Partner: </b> <b id="height2"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Religion: </b> <b id="religion2"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Smoking: </b> <b id="smoking2"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Earning Level: </b> <b id="earning_level2"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Physique: </b> <b id="physique2"> &nbsp; </b>
+						</p>
+					</div>
+					<div data-controltype="textblock">
+						<p>
+							<b> Age Of Partner: </b> <b id="age2"> &nbsp; </b>
+						</p>
+					</div>
+				</div>
+			</div>
+			<br>
+			<hr>
+			<br> <a data-role="button" data-theme="b" href="#matches">
+				Find A Partner </a>
+		</div>
+	</div>
+	<!-- /page -->
+
+	<!-- Profile Editor page -->
+	<div data-role="page" data-control-title="Profile editor" id="page5">
+		<div data-role="panel" id="panel1" data-position="left"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" data-divider-theme="e" data-inset="false">
+				<li data-role="list-divider">Match</li>
+				<li data-theme="b"><a href="#matches" data-transition="slide">
+						Find Partner </a></li>
+				<li data-theme="b"><a href="#reviews" data-transition="slide">
+						Profile Views <span class="ui-li-count"> 14 </span>
+				</a></li>
+				<li class="messagesMenuOption" data-theme="b"><a
+					href="#messages" data-transition="slide"> Messages <span
+						class="ui-li-count"> 12 </span>
+				</a></li>
+				<li data-theme="b"><a href="#page4" data-transition="slide">
+						My Profile </a></li>
+				<li data-theme="b"><a href="#blocks" data-transition="slide">
+						Blocking List </a></li>
+				<li data-role="list-divider"></li>
+				<li data-theme="b"><a href="#signout" data-transition="slide">
+						Log Out </a></li>
+			</ul>
+		</div>
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<a data-role="button" data-inline="true" data-direction="reverse"
+				onclick="$('#edit_form').submit();" class="ui-btn-right"
+				data-icon="check"> Save </a> <a data-controltype="panelbutton"
+				data-role="button" data-inline="true" data-theme="b" href="#panel1"
+				data-icon="bars" data-iconpos="left" class="ui-btn-left"> Menu </a>
+			<h3>Profile Editor</h3>
+		</div>
+		<div data-role="content">
+			<!-- a href="http://www.hdwallpapers.in/walls/renault_alpine_concept_car-wide.jpg"-->
+			<div style="text-align: center">
+				<img style="width: 20em;" id="update_photo" src="">
+			</div>
+			<!-- /a -->
+
+			<form id="edit_form" action="editprofile" method="POST"
+				enctype="multipart/form-data">
+
+				<div data-controltype="textblock">
+					<p>
+						<b id="edit_error" class="error"> &nbsp; </b>
+					</p>
+				</div>
+
+				<div data-role="fieldcontain" data-controltype="fileinput">
+					<label for="update_file"> update photo: </label> <input type="file"
+						name="file" id="update_file" accept="image/*">
+				</div>
+				<label for="slider-0">My Privacy Level:</label>
+                 <input type="range" name="privacy_level" id="privacy_level" value="0" min="0" max="100">
+                 
+				<div data-role="collapsible-set" data-theme="e">
+					<div data-role="collapsible" data-collapsed="true">
+						<h3>My Profile Data</h3>
+
+						<div data-role="fieldcontain" data-controltype="textinput">
+							<label for="update_first"> first name: </label> <input
+								name="update_first" id="update_first" value="" type="text">
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="textinput">
+							<label for="update_last"> last name: </label> <input
+								name="update_last" id="update_last" value="" type="text">
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="textarea">
+							<label for="update_about_me"> about me: </label>
+							<textarea name="update_about_me" id="update_about_me"
+								placeholder="write about yourself"></textarea>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_sex"> sex: </label> <select id="update_sex"
+								name="update_sex" data-native-menu="false">
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="dateinput">
+							<label for="update_birthday"> birthday: </label> <input
+								name="update_birthday" id="update_birthday" value="2013-01-08"
+								type="date">
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_education"> education: </label> <select
+								id="update_education" name="update_education"
+								data-native-menu="false">
+								<option value="higher">Higher education</option>
+								<option value="secondary">Secondary education</option>
+								<option value="none">None</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_area"> area: </label> <select id="update_area"
+								name="update_area" data-native-menu="false">
+								<option value="darom">Darom</option>
+								<option value="tzafon">Tzafon</option>
+								<option value="merkaz">Merkaz</option>
+								<option value="eilat">Eilat</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_language"> language: </label> <select
+								id="update_language" name="update_language"
+								data-native-menu="false">
+								<option value="hebrew">Hebrew</option>
+								<option value="english">English</option>
+								<option value="russian">Russian</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_marital_status"> marital status: </label> <select
+								id="update_marital_status" name="update_marital_status"
+								data-native-menu="false">
+								<option value="single">Single</option>
+								<option value="divorced">Divorced</option>
+								<option value="widow/widower">Widow/Widower</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_children"> children: </label> <select
+								id="update_children" name="update_children"
+								data-native-menu="false">
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_eye_color"> eye color: </label> <select
+								id="update_eye_color" name="update_eye_color"
+								data-native-menu="false">
+								<option value="blue">Blue</option>
+								<option value="black">Black</option>
+								<option value="green">Green</option>
+								<option value="brown">Brown</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_hair_type"> hair type: </label> <select
+								id="update_hair_type" name="update_hair_type"
+								data-native-menu="false">
+								<option value="curly">Curly</option>
+								<option value="straight">Straight</option>
+								<option value="dreads">Dreads</option>
+								<option value="wavy">Wavy</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_hair_color"> hair color: </label> <select
+								id="update_hair_color" name="update_hair_color"
+								data-native-menu="false">
+								<option value="blond">Blond</option>
+								<option value="brunet">Brunet</option>
+								<option value="black">Black</option>
+								<option value="color">Color</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_origin"> origin: </label> <select
+								id="update_origin" name="update_origin" data-native-menu="false">
+								<option value="ashkenazic">Ashkenazic</option>
+								<option value="sephardi">Sephardi</option>
+								<option value="else">Else</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_height"> height: </label> <select
+								id="update_height" name="update_height">
+								<option value="141">141</option>
+								<option value="142">142</option>
+								<option value="143">143</option>
+								<option value="144">144</option>
+								<option value="145">145</option>
+								<option value="146">146</option>
+								<option value="147">147</option>
+								<option value="148">148</option>
+								<option value="149">149</option>
+								<option value="150">150</option>
+								<option value="151">151</option>
+								<option value="152">152</option>
+								<option value="153">153</option>
+								<option value="154">154</option>
+								<option value="155">155</option>
+								<option value="156">156</option>
+								<option value="157">157</option>
+								<option value="158">158</option>
+								<option value="159">159</option>
+								<option value="160">160</option>
+								<option value="161">161</option>
+								<option value="162">162</option>
+								<option value="163">163</option>
+								<option value="164">164</option>
+								<option value="165">165</option>
+								<option value="166">166</option>
+								<option value="167">167</option>
+								<option value="168">168</option>
+								<option value="169">169</option>
+								<option value="170">170</option>
+								<option value="171">171</option>
+								<option value="172">172</option>
+								<option value="173">173</option>
+								<option value="174">174</option>
+								<option value="175">175</option>
+								<option value="176">176</option>
+								<option value="177">177</option>
+								<option value="178">178</option>
+								<option value="179">179</option>
+								<option value="180">180</option>
+								<option value="181">181</option>
+								<option value="182">182</option>
+								<option value="183">183</option>
+								<option value="184">184</option>
+								<option value="185">185</option>
+								<option value="186">186</option>
+								<option value="187">187</option>
+								<option value="188">188</option>
+								<option value="189">189</option>
+								<option value="190">190</option>
+								<option value="191">191</option>
+								<option value="192">192</option>
+								<option value="193">193</option>
+								<option value="194">194</option>
+								<option value="195">195</option>
+								<option value="196">196</option>
+								<option value="197">197</option>
+								<option value="198">198</option>
+								<option value="199">199</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_weight"> weight: </label> <select
+								id="update_weight" name="update_weight">
+								<option value="40">40</option>
+								<option value="41">41</option>
+								<option value="41">41</option>
+								<option value="41">41</option>
+								<option value="41">41</option>
+								<option value="45">45</option>
+								<option value="46">46</option>
+								<option value="47">47</option>
+								<option value="48">48</option>
+								<option value="49">49</option>
+								<option value="50">50</option>
+								<option value="51">51</option>
+								<option value="52">52</option>
+								<option value="53">53</option>
+								<option value="54">54</option>
+								<option value="55">55</option>
+								<option value="56">56</option>
+								<option value="57">57</option>
+								<option value="58">58</option>
+								<option value="59">59</option>
+								<option value="60">60</option>
+								<option value="61">61</option>
+								<option value="62">62</option>
+								<option value="63">63</option>
+								<option value="64">64</option>
+								<option value="65">65</option>
+								<option value="66">66</option>
+								<option value="67">67</option>
+								<option value="68">68</option>
+								<option value="69">69</option>
+								<option value="70">70</option>
+								<option value="71">71</option>
+								<option value="72">72</option>
+								<option value="73">73</option>
+								<option value="74">74</option>
+								<option value="75">75</option>
+								<option value="76">76</option>
+								<option value="77">77</option>
+								<option value="78">78</option>
+								<option value="79">79</option>
+								<option value="80">80</option>
+								<option value="81">81</option>
+								<option value="82">82</option>
+								<option value="83">83</option>
+								<option value="84">84</option>
+								<option value="85">85</option>
+								<option value="86">86</option>
+								<option value="87">87</option>
+								<option value="88">88</option>
+								<option value="89">89</option>
+								<option value="90">90</option>
+								<option value="91">91</option>
+								<option value="92">92</option>
+								<option value="93">93</option>
+								<option value="94">94</option>
+								<option value="95">95</option>
+								<option value="96">96</option>
+								<option value="97">97</option>
+								<option value="98">98</option>
+								<option value="99">99</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_religion"> religion: </label> <select
+								id="update_religion" name="update_religion"
+								data-native-menu="false">
+								<option value="christian">Christian</option>
+								<option value="jew">Jew</option>
+								<option value="muslim">Muslim</option>
+								<option value="buddhism">Buddhism</option>
+								<option value="atheist">Atheist</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_smoking"> smoking: </label> <select
+								id="update_smoking" name="update_smoking"
+								data-native-menu="false">
+								<option value="smoker">Smoker</option>
+								<option value="non_smoker">Non smoker</option>
+								<option value="else">Else</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_earning_level"> earning level: </label> <select
+								id="update_earning_level" name="update_earning_level"
+								data-native-menu="false">
+								<option value="high">High</option>
+								<option value="medium">Medium</option>
+								<option value="low">Low</option>
+								<option value="private">Private</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_intrested_in"> interested in: </label> <select
+								id="update_intrested_in" name="update_intrested_in"
+								data-native-menu="false">
+								<option value="male">Men</option>
+								<option value="female">Women</option>
+								<option value="both">Both</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_physique"> physique: </label> <select
+								id="update_physique" name="update_physique"
+								data-native-menu="false">
+								<option value="thin">Thin</option>
+								<option value="normal">Normal</option>
+								<option value="plump">Plump</option>
+								<option value="athletic">Athletic</option>
+							</select>
+						</div>
+
+					</div>
+				</div>
+
+				<div data-role="collapsible-set" data-theme="e">
+					<div data-role="collapsible" data-collapsed="true">
+						<h3>Partner Requirements</h3>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_education2"> education: </label> <select
+								id="update_education2" name="update_education2"
+								data-native-menu="false">
+								<option value="higher">Higher education</option>
+								<option value="secondary">Secondary education</option>
+								<option value="none">None</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_area2"> area: </label> <select
+								id="update_area2" name="update_area2" data-native-menu="false">
+								<option value="darom">Darom</option>
+								<option value="tzafon">Tzafon</option>
+								<option value="merkaz">Merkaz</option>
+								<option value="eilat">Eilat</option>
+								<option value="none">None</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_language2"> language: </label> <select
+								id="update_language2" name="update_language2"
+								data-native-menu="false">
+								<option value="hebrew">Hebrew</option>
+								<option value="english">English</option>
+								<option value="russian">Russian</option>
+								<option value="none">None</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_marital_status2"> marital status: </label> <select
+								id="update_marital_status2" name="update_marital_status2"
+								data-native-menu="false">
+								<option value="single">Single</option>
+								<option value="divorced">Divorced</option>
+								<option value="widow/widower">Widow/Widower</option>
+								<option value="none">None</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_eye_color2"> eye color: </label> <select
+								id="update_eye_color2" name="update_eye_color2"
+								data-native-menu="false">
+								<option value="blue">Blue</option>
+								<option value="green">Green</option>
+								<option value="brown">Brown</option>
+								<option value="none">None</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_hair_type2"> hair type: </label> <select
+								id="update_hair_type2" name="update_hair_type2"
+								data-native-menu="false">
+								<option value="curly">Curly</option>
+								<option value="straight">Straight</option>
+								<option value="dreads">Dreads</option>
+								<option value="wavy">Wavy</option>
+								<option value="none">None</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_hair_color2"> hair color: </label> <select
+								id="update_hair_color2" name="update_hair_color2"
+								data-native-menu="false">
+								<option value="blond">Blond</option>
+								<option value="brunet">Brunet</option>
+								<option value="black">Black</option>
+								<option value="color">Color</option>
+								<option value="none">None</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_origin2"> origin: </label> <select
+								id="update_origin2" name="update_origin2"
+								data-native-menu="false">
+								<option value="ashkenazic">Ashkenazic</option>
+								<option value="sephardi">Sephardi</option>
+								<option value="else">Else</option>
+								<option value="none">None</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_religion2"> religion: </label> <select
+								id="update_religion2" name="update_religion2"
+								data-native-menu="false">
+								<option value="christian">Christian</option>
+								<option value="jew">Jew</option>
+								<option value="muslim">Muslim</option>
+								<option value="buddhism">Buddhism</option>
+								<option value="none">None</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_smoking2"> smoking: </label> <select
+								id="update_smoking2" name="update_smoking2"
+								data-native-menu="false">
+								<option value="smoker">Smoker</option>
+								<option value="non_smoker">Non smoker</option>
+								<option value="none">None</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_earning_level2"> earning level: </label> <select
+								id="update_earning_level2" name="update_earning_level2"
+								data-native-menu="false">
+								<option value="high">High</option>
+								<option value="medium">Medium</option>
+								<option value="low">Low</option>
+								<option value="none">None</option>
+							</select>
+						</div>
+
+						<div data-role="fieldcontain" data-controltype="selectmenu">
+							<label for="update_physique2"> physique: </label> <select
+								id="update_physique2" name="update_physique2"
+								data-native-menu="false">
+								<option value="thin">Thin</option>
+								<option value="normal">Normal</option>
+								<option value="plump">Plump</option>
+								<option value="athletic">Athletic</option>
+								<option value="none">None</option>
+							</select>
+						</div>
+
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<div data-role="fieldcontain" data-controltype="selectmenu">
+									<label for="update_minheight2"> height from: </label> <select
+										id="update_minheight2" name="update_minheight2"
+										data-inline="true" data-native-menu="false">
+										<option value="140">140</option>
+										<option value="150">150</option>
+										<option value="160">160</option>
+										<option value="170">170</option>
+										<option value="180">180</option>
+										<option value="190">190</option>
+									</select>
+								</div>
+							</div>
+							<div class="ui-block-b">
+								<div data-role="fieldcontain" data-controltype="selectmenu">
+									<label for="update_maxheight2"> to: </label> <select
+										data-inline="true" id="update_maxheight2"
+										name="update_maxheight2" data-native-menu="false">
+										<option value="140">149</option>
+										<option value="150">159</option>
+										<option value="160">169</option>
+										<option value="170">179</option>
+										<option value="180">189</option>
+										<option value="190">199</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<hr id="LINE"
+							style="height: 3px; background-color: #ccc; border: 0; margin-top: 12px; margin-bottom: 12px;">
+
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<div data-role="fieldcontain" data-controltype="selectmenu">
+									<label for="update_min_age2"> age from: </label> <select
+										id="update_min_age2" name="update_min_age2" data-inline="true">
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+										<option value="25">25</option>
+										<option value="26">26</option>
+										<option value="27">27</option>
+										<option value="28">28</option>
+										<option value="29">29</option>
+										<option value="30">30</option>
+										<option value="31">31</option>
+										<option value="32">32</option>
+										<option value="33">33</option>
+										<option value="34">34</option>
+										<option value="35">35</option>
+										<option value="36">36</option>
+										<option value="37">37</option>
+										<option value="38">38</option>
+										<option value="39">39</option>
+										<option value="40">40</option>
+										<option value="41">41</option>
+										<option value="42">42</option>
+										<option value="43">43</option>
+										<option value="44">44</option>
+										<option value="45">45</option>
+										<option value="46">46</option>
+										<option value="47">47</option>
+										<option value="48">48</option>
+										<option value="49">49</option>
+										<option value="50">50</option>
+										<option value="51">51</option>
+										<option value="52">52</option>
+										<option value="53">53</option>
+										<option value="54">54</option>
+										<option value="55">55</option>
+										<option value="56">56</option>
+										<option value="57">57</option>
+										<option value="58">58</option>
+										<option value="59">59</option>
+										<option value="60">60</option>
+										<option value="61">61</option>
+										<option value="62">62</option>
+										<option value="63">63</option>
+										<option value="64">64</option>
+										<option value="65">65</option>
+										<option value="66">66</option>
+										<option value="67">67</option>
+										<option value="68">68</option>
+										<option value="69">69</option>
+										<option value="70">70</option>
+										<option value="71">71</option>
+										<option value="72">72</option>
+										<option value="73">73</option>
+										<option value="74">74</option>
+										<option value="75">75</option>
+										<option value="76">76</option>
+										<option value="77">77</option>
+										<option value="78">78</option>
+										<option value="79">79</option>
+										<option value="80">80</option>
+									</select>
+								</div>
+							</div>
+							<div class="ui-block-b">
+								<div data-role="fieldcontain" data-controltype="selectmenu">
+									<label for="update_max_age2"> to: </label> <select
+										id="update_max_age2" name="update_max_age2" data-inline="true">
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+										<option value="25">25</option>
+										<option value="26">26</option>
+										<option value="27">27</option>
+										<option value="28">28</option>
+										<option value="29">29</option>
+										<option value="30">30</option>
+										<option value="31">31</option>
+										<option value="32">32</option>
+										<option value="33">33</option>
+										<option value="34">34</option>
+										<option value="35">35</option>
+										<option value="36">36</option>
+										<option value="37">37</option>
+										<option value="38">38</option>
+										<option value="39">39</option>
+										<option value="40">40</option>
+										<option value="41">41</option>
+										<option value="42">42</option>
+										<option value="43">43</option>
+										<option value="44">44</option>
+										<option value="45">45</option>
+										<option value="46">46</option>
+										<option value="47">47</option>
+										<option value="48">48</option>
+										<option value="49">49</option>
+										<option value="50">50</option>
+										<option value="51">51</option>
+										<option value="52">52</option>
+										<option value="53">53</option>
+										<option value="54">54</option>
+										<option value="55">55</option>
+										<option value="56">56</option>
+										<option value="57">57</option>
+										<option value="58">58</option>
+										<option value="59">59</option>
+										<option value="60">60</option>
+										<option value="61">61</option>
+										<option value="62">62</option>
+										<option value="63">63</option>
+										<option value="64">64</option>
+										<option value="65">65</option>
+										<option value="66">66</option>
+										<option value="67">67</option>
+										<option value="68">68</option>
+										<option value="69">69</option>
+										<option value="70">70</option>
+										<option value="71">71</option>
+										<option value="72">72</option>
+										<option value="73">73</option>
+										<option value="74">74</option>
+										<option value="75">75</option>
+										<option value="76">76</option>
+										<option value="77">77</option>
+										<option value="78">78</option>
+										<option value="79">79</option>
+										<option value="80">80</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<!-- button delete profile  -->
+			<br> <span id="errordeleteuser" class="error"></span>
+			<form id="delete_button" action="deleteuserservlet">
+				<div align="right">
+					<input type="submit" data-theme="b" data-icon="delete"
+						data-iconpos="left" data-inline=true value="Delete Profile">
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- Partner Profile page -->
+	<div data-role="page" data-control-title="Profile" id="page6">
+		<div data-role="panel" id="panel1" data-position="left"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" data-divider-theme="e" data-inset="false">
+				<li data-role="list-divider">Match</li>
+				<li data-theme="b"><a href="#matches" data-transition="slide">
+						Find Partner </a></li>
+				<li data-theme="b"><a href="#reviews" data-transition="slide">
+						Profile Views <span class="ui-li-count"> 14 </span>
+				</a></li>
+				<li class="messagesMenuOption" data-theme="b"><a
+					href="#messages" data-transition="slide"> Messages <span
+						class="ui-li-count"> 12 </span>
+				</a></li>
+				<li data-theme="b"><a href="#page4" data-transition="slide">
+						My Profile </a></li>
+				<li data-theme="b"><a href="#blocks" data-transition="slide">
+						Blocking List </a></li>
+				<li data-role="list-divider"></li>
+				<li data-theme="b"><a href="#signout" data-transition="slide">
+						Log Out </a></li>
+			</ul>
+		</div>
+
+		<div data-role="panel" id="panel2" data-position="left"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" data-divider-theme="e" data-inset="false">
+				<li data-role="list-divider">Search User</li>
+				<li data-theme="b"><a href="#adminSearchAndBan"
+					data-transition="slide"> search users </a></li>
+				<li data-theme="b"><a href="#reports" data-transition="slide">
+						reported users </a></li>
+				<li data-theme="b"><a href="#new_photos"
+					data-transition="slide"> accept new photos<span
+						class="ui-li-count"> 14 </span>
+				</a></li>
+				<li data-theme="b"><a href="#blocks" data-transition="slide">
+						Ban List <span class="ui-li-count"> 12 </span>
+				</a></li>
+				<li data-role="list-divider"></li>
+				<li data-theme="b"><a href="#signout" data-transition="slide">
+						Log Out </a></li>
+			</ul>
+		</div>
+
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<a data-controltype="panelbutton" data-role="button"
+				data-inline="true" data-theme="b" href="#panel1" data-icon="bars"
+				data-iconpos="left" class="ui-btn-left" id="adminProfileMenu">
+				Menu </a>
+			<h3>Profile</h3>
+		</div>
+		<div data-role="content">
+			<!-- a href="http://www.hdwallpapers.in/walls/renault_alpine_concept_car-wide.jpg"-->
+			<div style="text-align: center">
+				<img style="width: 20em;" id="partner_photo2" src="">
+			</div>
+			<!-- /a -->
+			<div data-controltype="textblock">
+				<p>
+					<b> First Name: </b> <b id="partner_first_name2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Age: </b> <b id="partner_age2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Sex: </b> <b id="partner_sex2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Interested In: </b> <b id="partner_intrested_in2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Area: </b> <b id="partner_area2"> &nbsp; </b>
+				</p>
+			</div>
+			<hr
+				style="height: 3px; background-color: #ccc; border: 0; margin-top: 12px; margin-bottom: 12px;">
+			<div data-controltype="textblock">
+				<p>
+					<b> About me: </b> <b id="partner_about_me2"> &nbsp; </b>
+				</p>
+			</div>
+			<hr
+				style="height: 3px; background-color: #ccc; border: 0; margin-top: 12px; margin-bottom: 12px;">
+
+			<div data-controltype="textblock">
+				<p>
+					<b> Education: </b> <b id="partner_education2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Language: </b> <b id="partner_language2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Marital Status: </b> <b id="partner_marital_status2">
+						&nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Children: </b> <b id="partner_children2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Eye Color: </b> <b id="partner_eye_color2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Hair Type: </b> <b id="partner_hair_type2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Hair Color: </b> <b id="partner_hair_color2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Origin: </b> <b id="partner_origin2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Height: </b> <b id="partner_height2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Weight: </b> <b id="partner_weight2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Religion: </b> <b id="partner_religion2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Smoking: </b> <b id="partner_smoking2"> &nbsp; </b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Earning Level: </b> <b id="partner_earning_level2"> &nbsp;
+					</b>
+				</p>
+			</div>
+			<div data-controltype="textblock">
+				<p>
+					<b> Physique: </b> <b id="partner_physique2"> &nbsp; </b>
+				</p>
+			</div>
+			<br>
+			<hr>
+			<br>
+			<div class="ui-grid-a" style="width: 100%; height: 100%;">
+				<div class="ui-block-a" style="width: 60%;">
+					<a data-role="button" data-theme="b" href="#matches"
+						id="find_partner_user_button"> Find A Partner </a>
+				</div>
+				<div class="ui-grid-b" style="width: 40%;">
+					<div class="ui-block-a" style="width: 50%;">
+						<a data-role="button" data-theme="a" href="#reportAboutUser"
+							id="report_user_button"> Report the user </a>
+					</div>
+					<div class="ui-block-b" style="width: 50%;">
+						<a data-role="button" data-theme="a" href="#"
+							onclick="return blockProfile(event);" id="block_user_button">
+							Block the user </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /page -->
+
+	<!--  Matches list page -->
+	<div data-role="page" data-control-title="matches list" id="matches"
+		data-theme="b" data-content-theme="b">
+
+		<div data-role="panel" id="panel1" data-position="left"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" data-divider-theme="e" data-inset="false">
+				<li data-role="list-divider">Match</li>
+				<li data-theme="b"><a href="#page4" data-transition="slide">
+						My Profile </a></li>
+				<li data-theme="b"><a href="#reviews" data-transition="slide">
+						Profile Views <span class="ui-li-count"> 14 </span>
+				</a></li>
+				<li class="messagesMenuOption" data-theme="b"><a
+					href="#messages" data-transition="slide"> Messages <span
+						class="ui-li-count"> 12 </span>
+				</a></li>
+				<li data-theme="b"><a href="#blocks" data-transition="slide">
+						Blocking List </a></li>
+				<li data-role="list-divider"></li>
+				<li data-theme="b"><a href="#signout" data-transition="slide">
+						Log Out </a></li>
+			</ul>
+		</div>
+
+		<div data-role="panel" id="panel2" data-position="right"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" data-divider-theme="e" data-inset="false"
+				id="last_seen_partners">
+				<li data-role="list-divider">here will be last seen partner
+					list...</li>
+			</ul>
+		</div>
+
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<a data-controltype="panelbutton" data-role="button"
+				data-inline="true" href="#panel1" data-icon="bars"
+				data-iconpos="left" class="ui-btn-left"> Menu </a> <a
+				data-controltype="panelbutton" data-role="button" data-inline="true"
+				href="#panel2" data-icon="star" data-iconpos=left
+				class="ui-btn-right"> Last seen </a>
+			<h3>Find a partner</h3>
+		</div>
+
+		<div data-role="content">
+			<label id="matches_banned_label"> </label>
+		</div>
+
+		<div data-role="content">
+			<p id="start_create"></p>
+		</div>
+	</div>
+
+	<!--  blocking list page -->
+	<div data-role="page" data-control-title="blocking list" id="blocks"
+		data-theme="b" data-content-theme="b">
+
+		<div data-role="panel" id="panel1" data-position="left"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" id="blocksPanel" data-divider-theme="e"
+				data-inset="false">
+				<li data-role="list-divider">Match</li>
+				<li data-theme="b"><a href="#matches" data-transition="slide">
+						Find Partner </a></li>
+				<li data-theme="b"><a href="#page4" data-transition="slide">
+						My Profile </a></li>
+				<li data-theme="b"><a href="#reviews" data-transition="slide">
+						Profile Views <span class="ui-li-count"> 14 </span>
+				</a></li>
+				<li class="messagesMenuOption" data-theme="b"><a
+					href="#messages" data-transition="slide"> Messages <span
+						class="ui-li-count"> 12 </span>
+				</a></li>
+				<li data-role="list-divider"></li>
+				<li data-theme="b"><a href="#signout" data-transition="slide">
+						Log Out </a></li>
+			</ul>
+		</div>
+
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<a data-controltype="panelbutton" data-role="button"
+				data-inline="true" href="#panel1" data-icon="bars"
+				data-iconpos="left" class="ui-btn-left"> Menu </a>
+			<h3 id="blocktitle">Blocked List</h3>
+		</div>
+
+		<div data-role="content">
+			<label id="blocks_banned_label"> </label>
+		</div>
+
+		<div data-role="content">
+			<p id="start_create_blocking"></p>
+		</div>
+	</div>
+
+	<!--  Messages list page -->
+	<div data-role="page" data-control-title="messages list" id="messages"
+		data-theme="b" data-content-theme="b">
+
+		<div data-role="panel" id="panel1" data-position="left"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" data-divider-theme="e" data-inset="false">
+				<li data-role="list-divider">Match</li>
+				<li data-theme="b"><a href="#matches" data-transition="slide">
+						Find Partner </a></li>
+				<li data-theme="b"><a href="#page4" data-transition="slide">
+						My Profile </a></li>
+				<li data-theme="b"><a href="#reviews" data-transition="slide">
+						Profile Views <span class="ui-li-count"> 14 </span>
+				</a></li>
+				<li data-theme="b"><a href="#blocks" data-transition="slide">
+						Blocking List </a></li>
+				<li data-role="list-divider"></li>
+				<li data-theme="b"><a href="#signout" data-transition="slide">
+						Log Out </a></li>
+			</ul>
+		</div>
+
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<a data-controltype="panelbutton" data-role="button"
+				data-inline="true" href="#panel1" data-icon="bars"
+				data-iconpos="left" class="ui-btn-left"> Menu </a>
+			<h3>Messages</h3>
+		</div>
+
+		<div data-role="content" data-position="fixed">
+		</div>
+
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" id="start_create_messages">
+			</ul>
+		</div>
+	</div>
+
+	<!--  Reviews list page -->
+	<div data-role="page" data-control-title="reviews list" id="reviews"
+		data-theme="b" data-content-theme="b">
+
+		<div data-role="panel" id="panel1" data-position="left"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" data-divider-theme="e" data-inset="false">
+				<li data-role="list-divider">Match</li>
+				<li data-theme="b"><a href="#matches" data-transition="slide">
+						Find Partner </a></li>
+				<li data-theme="b"><a href="#page4" data-transition="slide">
+						My Profile </a></li>
+				<li class="messagesMenuOption" data-theme="b"><a
+					href="#messages" data-transition="slide"> Messages <span
+						class="ui-li-count"> 12 </span>
+				</a></li>
+				<li data-theme="b"><a href="#blocks" data-transition="slide">
+						Blocking List </a></li>
+				<li data-role="list-divider"></li>
+				<li data-theme="b"><a href="#signout" data-transition="slide">
+						Log Out </a></li>
+			</ul>
+		</div>
+
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<a data-controltype="panelbutton" data-role="button"
+				data-inline="true" href="#panel1" data-icon="bars"
+				data-iconpos="left" class="ui-btn-left"> Menu </a>
+			<h3>Reviews</h3>
+		</div>
+
+		<div data-role="content">
+			<label id="reviews_banned_label"> </label>
+		</div>
+
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" id="start_create_reviews">
+			</ul>
+		</div>
+	</div>
+
+	<!-- Start of signout page -->
+	<div data-role="page" id="signout">
+		<span class="error" id="signouterror">&nbsp;</span> <br />
+	</div>
+
+	<!--  admin search and ban page -->
+	<div data-role="page" data-control-title="search"
+		id="adminSearchAndBan" data-theme="b" data-content-theme="b">
+
+		<div data-role="panel" id="panel1" data-position="left"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" data-divider-theme="e" data-inset="false">
+				<li data-role="list-divider">Search User</li>
+				<li data-theme="b"><a href="#reports" data-transition="slide">
+						reported users </a></li>
+				<li data-theme="b"><a href="#new_photos"
+					data-transition="slide"> accept new photos<span
+						class="ui-li-count"> 14 </span>
+				</a></li>
+				<li data-theme="b"><a href="#blocks" data-transition="slide">
+						Ban List <span class="ui-li-count"> 12 </span>
+				</a></li>
+				<li data-role="list-divider"></li>
+				<li data-theme="b"><a href="#signout" data-transition="slide">
+						Log Out </a></li>
+			</ul>
+		</div>
+
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<a data-controltype="panelbutton" data-role="button"
+				data-inline="true" href="#panel1" data-icon="bars"
+				data-iconpos="left" class="ui-btn-left"> Menu </a>
+			<h3>Search User</h3>
+		</div>
+		<div data-role="content">
+			<select onchange="actionOnOptionClick()" id="select_id">
+				<option value="search_name">name</option>
+				<option value="search_email">email</option>
+				<option value="search_sex">sex</option>
+				<option value="search_id" selected>id</option>
+			</select> <br>
+			<p>
+				<label id="label_input_search" for="text_search_input"> id:
+				</label> <span id="input_search"> <input name="text_search_input"
+					id="text_search_input" placeholder="" value="" type="text">
+				</span> <br> <a data-role="button" data-theme="b" href="#"
+					onclick="return show_search_results(event);"> search! </a>
+			</p>
+			<p id="start_create_search"></p>
+		</div>
+	</div>
+
+	<!--  Ban page -->
+	<div data-role="page" data-control-title="ban" id="adminBanPage"
+		data-theme="b" data-content-theme="b">
+
+		<div data-role="panel" id="panel1" data-position="left"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" data-divider-theme="e" data-inset="false">
+				<li data-role="list-divider">Search User</li>
+				<li data-theme="b"><a href="#adminSearchAndBan"
+					data-transition="slide"> search users </a></li>
+				<li data-theme="b"><a href="#reports" data-transition="slide">
+						reported users </a></li>
+				<li data-theme="b"><a href="#new_photos"
+					data-transition="slide"> accept new photos<span
+						class="ui-li-count"> 14 </span>
+				</a></li>
+				<li data-theme="b"><a href="#blocks" data-transition="slide">
+						Ban List <span class="ui-li-count"> 12 </span>
+				</a></li>
+				<li data-role="list-divider"></li>
+				<li data-theme="b"><a href="#signout" data-transition="slide">
+						Log Out </a></li>
+			</ul>
+		</div>
+
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<a data-controltype="panelbutton" data-role="button"
+				data-inline="true" href="#panel1" data-icon="bars"
+				data-iconpos="left" class="ui-btn-left"> Menu </a>
+			<h3>Ban User</h3>
+		</div>
+		<div data-role="content">
+			<select onchange="actionOnBanOptionClick()" id="ban_reason_select_id">
+				<option value="2">This user has been reported by another
+					user</option>
+				<option value="3">Other</option>
+			</select><br>
+			<p>
+				<label id="label_input_reason" for="text_search_reason">
+					admin's comment: </label> <input name="text_search_reason"
+					id="text_search_reason" placeholder="" value="" type="text">
+				<br> <a data-role="button" id="ban_button" data-theme="b"
+					href="#" onclick="return BanUserHelper(event);"> Ban! </a>
+			</p>
+			<p id="start_create_search"></p>
+		</div>
+	</div>
+
+	<!-- Start of chat page -->
+	<div data-role="page" data-control-title="Chat" id="chat"
+		data-theme="b" data-content-theme="b">
+
+		<div data-role="panel" id="panel1" data-position="left"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" data-divider-theme="e" data-inset="false">
+				<li data-role="list-divider">Match</li>
+				<li data-theme="b"><a href="#page4" data-transition="slide">
+						My Profile </a></li>
+				<li data-theme="b"><a href="#reviews" data-transition="slide">
+						Profile Views <span class="ui-li-count"> 14 </span>
+				</a></li>
+				<li data-theme="b"><a href="#matches" data-transition="slide">
+						Find Partner </a></li>
+				<li class="messagesMenuOption" data-theme="b"><a
+					href="#messages" data-transition="slide"> Messages <span
+						class="ui-li-count"> 12 </span>
+				</a></li>
+				<li data-role="list-divider"></li>
+				<li data-theme="b"><a href="#signout" data-transition="slide">
+						Log Out </a></li>
+			</ul>
+		</div>
+
+		<div data-theme="b" data-role="header" data-position="fixed"
+			style="height: 5em;">
+			<a data-controltype="panelbutton" data-role="button"
+				data-inline="true" href="#panel1" data-icon="bars"
+				data-iconpos="left" class="ui-btn-left"> Menu </a> <img
+				style="float: right; display: inline; height: 5em" border="0"
+				id="conversator_photo" src="" alt="image">
+			<h3 id="conversator_name">Conversation with</h3>
+		</div>
+
+		<div data-role="content">
+			<div id="content">
+				<div id="incomingMessages">
+					<div class='loading'>Loading...</div>
+				</div>
+			</div>
+		</div>
+
+		<div data-theme="b" data-role="footer" data-position="fixed">
+			<label style="float: right; display: inline"> <strong
+				id='online_status'></strong>&nbsp;&nbsp;&nbsp; <a href=""
+				id="chat_counter" data-mini="true" data-role="button"
+				data-inline="true" data-theme="e" title="counter">...</a>
+			</label> <label for="messageText"><strong>Message:</strong></label>
+			<textarea name="messageText" id="messageText"></textarea>
+
+			<fieldset class="ui-grid-a">
+				<div class="ui-block-a">
+					<a href="#messages" id="goBackButton" data-role="button">Back</a>
+				</div>
+				<div class="ui-block-b">
+					<!-- <button data-theme="b" id="chatSendButton" name="chatSendButton">Send</button> -->
+					<a href="" id="chatSendButton" data-role="button">Send</a>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+
+	<!-- Report List -->
+	<div data-role="page" data-control-title="Reported Users" id=reports
+		data-theme="b" data-content-theme="b">
+		<div data-role="panel" id="panel1" data-position="left"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" data-divider-theme="e" data-inset="false">
+				<li data-role="list-divider">Search User</li>
+				<li data-theme="b"><a href="#adminSearchAndBan"
+					data-transition="slide"> search users </a></li>
+				<li data-theme="b"><a href="#reports" data-transition="slide">
+						reported users </a></li>
+				<li data-theme="b"><a href="#new_photos"
+					data-transition="slide"> accept new photos<span
+						class="ui-li-count"> 14 </span>
+				</a></li>
+				<li data-theme="b"><a href="#blocks" data-transition="slide">
+						Ban List <span class="ui-li-count"> 12 </span>
+				</a></li>
+				<li data-role="list-divider"></li>
+				<li data-theme="b"><a href="#signout" data-transition="slide">
+						Log Out </a></li>
+			</ul>
+		</div>
+
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<a data-controltype="panelbutton" data-role="button"
+				data-inline="true" href="#panel1" data-icon="bars"
+				data-iconpos="left" class="ui-btn-left"> Menu </a>
+			<h3>Reported Users</h3>
+		</div>
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" id="start_create_reports">
+			</ul>
+		</div>
+	</div>
+	
+		<!-- Image List -->
+	<div data-role="page" data-control-title="Images For Approval" id=new_photos
+ 		data-theme="b" data-content-theme="b">	
+ 		<div data-role="panel" id="panel1" data-position="left"
+			data-display="reveal" data-theme="b" data-position-fixed="true">
+			<ul data-role="listview" data-divider-theme="e" data-inset="false">
+				<li data-role="list-divider">Search User</li>
+				<li data-theme="b"><a href="#adminSearchAndBan" data-transition="slide">
+						search users </a></li>
+				<li data-theme="b"><a href="#reports" data-transition="slide">
+						reported users </a></li>
+				<li data-theme="b"><a href="#new_photos" data-transition="slide">
+						accept new photos<span class="ui-li-count"> 14 </span>
+				</a></li>
+				<li data-theme="b"><a href="#blocks" data-transition="slide">
+						Ban List <span class="ui-li-count"> 12 </span>
+				</a></li>
+				<li data-role="list-divider"></li>
+				<li data-theme="b"><a href="#signout" data-transition="slide">
+						Log Out </a></li>
+			</ul>
+		</div>
+		
+		<div data-theme="b" data-role="header" data-position="fixed">
+			<a data-controltype="panelbutton" data-role="button"
+				data-inline="true" href="#panel1" data-icon="bars"
+				data-iconpos="left" class="ui-btn-left"> Menu </a>
+				<h3>Images For Approval</h3>
+ 		</div>
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" id="start_create_new_photos">
+			</ul>
+		</div>
+	</div>
+	
+	<!-- Report User Page -->
+	<div data-role="page" id="reportAboutUser">
+		<div data-role="content">
+			<form id=report_user action="ReportUserServlet">
+				<span class="error" id="error">&nbsp;</span> <br />
+				<div data-role="fieldcontain" data-controltype="textarea">
+					<label for="complaint"><b> Complaint : </b> </label>
+					<textarea name="complaint" id="complaint"
+						placeholder="What is the issue?"></textarea>
+				</div>
+				<div align="right">
+					<input type="submit" data-theme="b" data-icon="check"
+						data-iconpos="left" value="Send" data-inline="true">
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>
